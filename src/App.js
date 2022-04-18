@@ -6,7 +6,7 @@ import "./App.css";
 import routes from "./routes";
 
 const { Header, Sider, Content } = Layout;
-const route = routes.filter((item) => item.isShow === true);
+const route = routes.filter((item) => item.isShow === true && item.path !== '/login');
 class App extends React.Component {
   state = {
     collapsed: false,
