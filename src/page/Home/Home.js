@@ -5,37 +5,34 @@ import axios from "axios";
 const columns = [
   {
     title: "github名字",
-    dataIndex: "fullName",
+    dataIndex: "full_name",
   },
   {
     title: "仓库名",
     dataIndex: "name",
   },
   {
-    title: "头像",
-    dataIndex: "avatar",
-  },
-  {
     title: "gitHub Address",
-    dataIndex: "address",
+    dataIndex: "html_url",
   },
 ];
-const state = {
-  arr: [],
-};
-const data = [];
 
 
 const App = () => {
+  const state = {
+    arr: [],
+  };
   const [username, setUsername] = useState("");
+  const [data, setData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const addName = () => {
     setIsModalVisible(true);
   };
   const handleOk = (event) => {
     axios.get(`https://api.github.com/users/${username}/repos`).then((resp) => {
-      console.log(resp.data);
-      state.arr.push(resp.data);
+      // console.log(resp.data);
+      setData(resp.data)
+      // console.log(state.arr)
       setUsername("");
       setIsModalVisible(false);
     });
@@ -43,6 +40,8 @@ const App = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  console.log(data)
+
   return (
     <Fragment>
       <Button type="primary" onClick={addName}>

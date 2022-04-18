@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import Login from "./page/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Card from "./cardGithub"
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
