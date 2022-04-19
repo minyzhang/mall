@@ -4,8 +4,8 @@ import {Table} from '../../component/index'
 import axios from "axios";
 
 
+
 const App = (props) => {
-  // console.log(props)
   const [username, setUsername] = useState("");
   const [useSource, setUseSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -14,7 +14,7 @@ const App = (props) => {
   };
   const handleOk = (event) => {
     axios.get(`https://api.github.com/users/${username}/repos`).then((resp) => {
-      console.log(resp)  
+      // console.log(resp)  
     setUseSource([...resp.data]);
       setUsername("");
       setIsModalVisible(false);

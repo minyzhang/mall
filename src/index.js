@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import Login from "./page/Login";
+// import store from "./store/store"
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
+// window.store = store
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>

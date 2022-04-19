@@ -5,10 +5,11 @@ const data = {
 };
 const TypeData = (state = data, actions) => {
   switch (actions.type) {
-    case "miny":
+    case "detail":
       return {
         ...state,
         ...actions,
+        age : actions.age+state.age
       };
     default:
       return state;

@@ -1,7 +1,6 @@
-import React from "react";
-import { Table, Button } from "antd";
-import axios from "axios";
-// import {Route,NavLink} from 'react-router-dom'
+import React, { Fragment } from "react";
+import { Table } from "antd";
+import { withRouter } from "react-router-dom";;
 
 const columns = [
   {
@@ -16,28 +15,21 @@ const columns = [
     title: "gitHub Address",
     dataIndex: "address",
   },
-  {
-    title: "Action",
-    dataIndex: "",
-    key: "x",
-    render: (props) => (
-      <Button
-        type="primary"
-        onClick={(e) => {
-          console.log(props)
-          axios.get(`https://api.github.com/repos/${props.full_name}/contents`).then((resp) => {
-            console.log(resp);
-          });
-          props.history.push('/goods')
-        }}
-      >
-        Search
-      </Button>
-    ),
-  },
 ];
 
-export default function table(props) {
-  console.log(props)
-  return <Table columns={columns} dataSource={props.data} />;
-}
+const Tables = (props) => {
+  return (
+    <Fragment>
+      <Table
+        onRow={(pro, column, index) => {
+          return {
+            onClick: (e)=>{ props.history.push({pathname:'/goods',state:{info:pro.full_name}})},
+          };
+        }}
+        columns={columns}
+        dataSource={props.data}
+      />
+    </Fragment>
+  );
+};
+export default withRouter(Tables);

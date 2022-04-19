@@ -27,7 +27,7 @@ class App extends React.Component {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             {route.map((item) => {
               return (
-                <Menu.Item key={item.path} icon={item.icon}>
+                <Menu.Item key={item.path} rou={this.props} icon={item.icon}>
                   <NavLink to={item.path}></NavLink>
                   {item.title}
                 </Menu.Item>
