@@ -5,7 +5,7 @@ export default class Login extends Component {
     console.log("Failed:", errorInfo);
   };
   onFinish = (values) => {
-      this.props.history.push('/home');
+      this.props.history.push('/');
       window.localStorage.setItem('login',values.username);
     console.log("Success:", values);
   };

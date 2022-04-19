@@ -1,54 +1,43 @@
 import React, { Fragment, useState } from "react";
-import { Table, Button, Modal } from "antd";
+import {Button, Modal} from "antd";
+import {Table} from '../../component/index'
 import axios from "axios";
-
-const columns = [
-  {
-    title: "github名字",
-    dataIndex: "full_name",
-  },
-  {
-    title: "仓库名",
-    dataIndex: "name",
-  },
-  {
-    title: "gitHub Address",
-    dataIndex: "html_url",
-  },
-];
 
 
 const App = () => {
-  const state = {
-    arr: [],
-  };
   const [username, setUsername] = useState("");
-  const [data, setData] = useState([]);
+  const [useSource, setUseSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const addName = () => {
     setIsModalVisible(true);
   };
   const handleOk = (event) => {
     axios.get(`https://api.github.com/users/${username}/repos`).then((resp) => {
-      // console.log(resp.data);
-      setData(resp.data)
-      // console.log(state.arr)
+      console.log(resp)  
+    setUseSource([...resp.data]);
       setUsername("");
       setIsModalVisible(false);
     });
+    
   };
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  console.log(data)
-
+  const data = useSource.map((item) => {
+    return {
+      key: item.id,
+      name: item.name,
+      full_name: item.full_name,
+      address: item.url,
+    };
+  });
   return (
     <Fragment>
-      <Button type="primary" onClick={addName}>
-        添加
+      <Button type="primary" style={{ margin: "10px" }} onClick={addName}>
+        搜索
       </Button>
       <Modal
-        title="Basic Modal"
+        title="gitHun search"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -63,7 +52,7 @@ const App = () => {
           />
         </form>
       </Modal>
-      <Table columns={columns} dataSource={data} />
+      <Table data={data}></Table>
     </Fragment>
   );
 };

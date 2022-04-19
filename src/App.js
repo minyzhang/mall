@@ -1,12 +1,12 @@
 import { Layout, Menu, Breadcrumb } from "antd";
 import React from "react";
-import { Route, Switch, Redirect, NavLink } from "react-router-dom";
+import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import "./App.css";
 import routes from "./routes";
 
 const { Header, Sider, Content } = Layout;
-const route = routes.filter((item) => item.isShow === true && item.path !== '/login');
+const route = routes.filter((item) => item.path);
 class App extends React.Component {
   state = {
     collapsed: false,
@@ -50,11 +50,15 @@ class App extends React.Component {
           </Header>
           {/* 导航栏 */}
           <Breadcrumb style={{ margin: "5px 10px" }}>
-            {route.map((item) => {
-              return (
-                <Breadcrumb.Item key={item.path}>{item.title}</Breadcrumb.Item>
-              );
-            })}
+            {route
+              .filter((item) => item.path === this.props.location.pathname)
+              .map((item) => {
+                return (
+                  <Breadcrumb.Item key={item.path}>
+                    {item.title}
+                  </Breadcrumb.Item>
+                );
+              })}
           </Breadcrumb>
           {/* 内容展示 */}
           <Content
@@ -78,7 +82,7 @@ class App extends React.Component {
                   ></Route>
                 );
               })}
-              <Redirect from="/" to="/home" />
+              <Redirect from="/" to="/home" exact="true"></Redirect>
             </Switch>
           </Content>
         </Layout>

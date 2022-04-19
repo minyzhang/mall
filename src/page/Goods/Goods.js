@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class GoodsList extends Component {
-    render() {
-        return (
-            <div>
-                goods page
-            </div>
-        );
-    }
+  render() {
+    console.log(this.props);
+    return <div>goods page</div>;
+  }
 }
 
 export default GoodsList;
