@@ -4,7 +4,8 @@ import {Table} from '../../component/index'
 import axios from "axios";
 
 
-const App = () => {
+const App = (props) => {
+  // console.log(props)
   const [username, setUsername] = useState("");
   const [useSource, setUseSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,7 +29,7 @@ const App = () => {
       key: item.id,
       name: item.name,
       full_name: item.full_name,
-      address: item.url,
+      address: item.html_url,
     };
   });
   return (
@@ -52,7 +53,7 @@ const App = () => {
           />
         </form>
       </Modal>
-      <Table data={data}></Table>
+      <Table data={data} {...props}></Table>
     </Fragment>
   );
 };
