@@ -1,23 +1,31 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, Fragment } from "react";
+import { getInfo } from "../../service/request";
 
 const GoodsList = (props) => {
   const [fileName, setFileName] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`https://api.github.com/repos/${props.location.state.info}/contents`)
-      .then((res) => {
-        console.log(res);
-        setFileName(res.data);
-      });
+    getInfo(props.location.state.info).then((res) => {
+      // console.log(res);
+      setFileName(res.data);
+    });
   }, []);
   return (
-    <ul>
-      {fileName.map((item) => {
-        return <li key={item.name}>{item.name}</li>;
-      })}
-    </ul>
+    <Fragment>
+      <button
+      style={{ margin:'10px 0',}}
+        onClick={() => {
+          props.history.goBack();
+        }}
+      >
+        返回
+      </button>
+      <ul>
+        {fileName.map((item) => {
+          return <li key={item.name}>{item.name}</li>;
+        })}
+      </ul>
+    </Fragment>
   );
 };
 

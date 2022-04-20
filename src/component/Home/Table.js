@@ -16,7 +16,6 @@ const columns = [
     dataIndex: "address",
   },
 ];
-
 const Tables = (props) => {
   return (
     <Fragment>

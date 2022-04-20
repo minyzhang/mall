@@ -1,9 +1,7 @@
 import React, { Fragment, useState } from "react";
-import {Button, Modal} from "antd";
-import {Table} from '../../component/index'
-import axios from "axios";
-
-
+import { Button, Modal } from "antd";
+import { Table } from "../../component/index";
+import { getList } from "../../service/request";
 
 const App = (props) => {
   const [username, setUsername] = useState("");
@@ -13,13 +11,12 @@ const App = (props) => {
     setIsModalVisible(true);
   };
   const handleOk = (event) => {
-    axios.get(`https://api.github.com/users/${username}/repos`).then((resp) => {
-      // console.log(resp)  
-    setUseSource([...resp.data]);
+    getList(username).then((resp) => {
+      console.log(resp);
+      setUseSource([...resp.data]);
       setUsername("");
       setIsModalVisible(false);
     });
-    
   };
   const handleCancel = () => {
     setIsModalVisible(false);
