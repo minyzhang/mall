@@ -4,30 +4,25 @@ import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import "./App.css";
 import routes from "./routes";
+import { connect } from "react-redux";
+import {toggle} from './action/index'
+
 
 const { Header, Sider, Content } = Layout;
 const route = routes.filter((item) => item.path);
-class App extends React.Component {
-  state = {
-    collapsed: false,
+const App = (props)=> {
+  const toggle = () => {
+    props.toggle(props.collapsed)
   };
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  };
-
-  render() {
     return (
       <Layout>
         {/* 侧边导航栏 */}
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+        <Sider trigger={null} collapsible collapsed={props.collapsed}>
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             {route.map((item) => {
               return (
-                <Menu.Item key={item.path} rou={this.props} icon={item.icon}>
+                <Menu.Item key={item.path} rou={props} icon={item.icon}>
                   <NavLink to={item.path}></NavLink>
                   {item.title}
                 </Menu.Item>
@@ -41,17 +36,17 @@ class App extends React.Component {
             style={{ padding: 0, paddingLeft: 10 }}
           >
             {React.createElement(
-              this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+             props.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
               {
                 className: "trigger",
-                onClick: this.toggle,
+                onClick: toggle,
               }
             )}
           </Header>
           {/* 导航栏 */}
           <Breadcrumb style={{ margin: "5px 10px" }}>
             {route
-              .filter((item) => item.path === this.props.location.pathname)
+              .filter((item) => item.path === props.location.pathname)
               .map((item) => {
                 return (
                   <Breadcrumb.Item key={item.path}>
@@ -76,8 +71,8 @@ class App extends React.Component {
                   <Route
                     key={item.path}
                     path={item.path}
-                    render={(props) => {
-                      return <ComPo {...props} />;
+                    render={(prop) => {
+                      return <ComPo {...prop} />;
                     }}
                   ></Route>
                 );
@@ -87,7 +82,6 @@ class App extends React.Component {
           </Content>
         </Layout>
       </Layout>
-    );
-  }
+    )
 }
-export default App;
+export default connect((res)=>{return {...res.TypeData}},{toggle})(App);

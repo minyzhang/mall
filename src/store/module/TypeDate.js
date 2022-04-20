@@ -1,15 +1,13 @@
 const data = {
-  name: 'zhangsn',
-  age:12
-  
+  collapsed: true
 };
 const TypeData = (state = data, actions) => {
   switch (actions.type) {
-    case "detail":
+    case "toggle":
       return {
         ...state,
         ...actions,
-        age : actions.age+state.age
+        collapsed:actions.collapsed
       };
     default:
       return state;

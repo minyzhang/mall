@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Button, Modal } from "antd";
-import { Table } from "../../component/index";
+import {Table}  from "../../component/index";
 import { getList } from "../../service/request";
 
 const App = (props) => {
