@@ -1,12 +1,12 @@
 const data = {
-  arr:[]
+  arr: [],
 };
 const depotData = (state = data, actions) => {
   switch (actions.type) {
     case "search":
       return {
         ...state,
-        arr:[...actions.arr]
+        arr: [...actions.arr],
       };
     default:
       return state;

@@ -12,18 +12,11 @@ const Detail = (props) => {
   }, []);
   return (
     <Fragment>
-      <button
-      style={{ margin:'10px 0',}}
-        onClick={() => {
-          props.history.goBack();
-        }}
-      >
+      <button type="button" style={{ margin: "10px 0" }} onClick={() => { props.history.goBack(); }}>
         返回
       </button>
       <ul>
-        {fileName.map((item) => {
-          return <li key={item.name}>{item.name}</li>;
-        })}
+        {fileName.map((item) => <li key={item.name}>{item.name}</li>)}
       </ul>
     </Fragment>
   );

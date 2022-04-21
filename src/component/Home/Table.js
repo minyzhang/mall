@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Table } from "antd";
-import { withRouter } from "react-router-dom";;
+import { withRouter } from "react-router-dom";
 
 const columns = [
   {
@@ -16,19 +16,16 @@ const columns = [
     dataIndex: "address",
   },
 ];
-const Tables = (props) => {
-  return (
-    <Fragment>
-      <Table
-        onRow={(pro, column, index) => {
-          return {
-            onClick: (e)=>{ props.history.push({pathname:'/detail',state:{info:pro.full_name}})},
-          };
-        }}
-        columns={columns}
-        dataSource={props.data}
-      />
-    </Fragment>
-  );
-};
-export default withRouter(Tables);
+// const Tables = );
+export default withRouter((props) => (
+  <Table
+    onRow={(pro) => ({
+      onClick: () => (props.history.push({
+        pathname: `/detail`,
+        state: { info: pro.full_name },
+      })),
+    })}
+    columns={columns}
+    dataSource={props.data}
+  />
+));

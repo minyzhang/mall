@@ -1,41 +1,34 @@
-import React, { Fragment, useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Button, Modal } from "antd";
-import { Table } from "../../component/index";
-import { getList } from "../../service/request";
 import { connect } from "react-redux";
-import { depot } from "../../action/index";
+import Table from "../../component/index";
+import { getList } from "../../service/request";
+import depot from "../../action/index";
 // import store from "../../store";
 
-const App = (props) => {
+function App(props) {
   const [username, setUsername] = useState("");
-  const [useSource, setUseSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const addName = () => {
     setIsModalVisible(true);
   };
-  const handleOk = (event) => {
+  const handleOk = () => {
     getList(username).then((resp) => {
-      // console.log(typeof resp.data);
-      // store.dispatch(TypeData())
-      setUseSource([...resp.data]);
       setUsername("");
       setIsModalVisible(false);
-    props.depot(resp.data);
+      props.depot(resp.data);
     });
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const data = props.arr.map((item) => {
-    return {
-      key: item.id,
-      name: item.name,
-      full_name: item.full_name,
-      address: item.html_url,
-    };
-  });
-  
+  const data = props.arr.map((item) => ({
+    key: item.id,
+    name: item.name,
+    full_name: item.full_name,
+    address: item.html_url,
+  }));
 
   return (
     <Fragment>
@@ -58,14 +51,9 @@ const App = (props) => {
           />
         </form>
       </Modal>
-      <Table data={data} {...props}></Table>
+      <Table data={data} {...props} />
     </Fragment>
   );
-};
+}
 
-export default connect(
-  (res) => {
-    return { ...res.depotData };
-  },
-  { depot }
-)(App);
+export default connect((res) => ({ ...res.depotData }), { depot })(App);
