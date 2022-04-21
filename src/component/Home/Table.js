@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 const columns = [
   {
-    title: "github名字",
+    title: "fullname",
     dataIndex: "full_name",
   },
   {
@@ -27,5 +27,6 @@ export default withRouter((props) => (
     })}
     columns={columns}
     dataSource={props.data}
+    bordered
   />
 ));

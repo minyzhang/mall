@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
+// eslint-disable-next-line import/no-cycle
 import routes from "./routes";
 
 const { Header, Content } = Layout;
@@ -46,7 +47,7 @@ const App = (props) => {
           }}
         >
           <Switch>
-            {/* {route.map((item) => {
+            {route.map((item) => {
               const ComPo = item.component;
               return (
                 <Route
@@ -55,9 +56,8 @@ const App = (props) => {
                   render={(prop) => <ComPo {...prop} />}
                 />
               );
-            })} */}
-            <Route path="/home" component={App} />
-            <Redirect from="/index" to="/home" exact />
+            })}
+            <Redirect from="/" to="/home" exact />
           </Switch>
         </Content>
       </Layout>

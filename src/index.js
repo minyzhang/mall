@@ -6,10 +6,9 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 import App from "./App";
-import Login from "./page/Login";
+// import Login from "./page/Login";
 import store from "./store";
 
 window.store = store;
@@ -18,9 +17,7 @@ root.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path="/" component={Login} />
-        <Route path="/index" component={App} />
-        <Redirect exact from="/" to="/login" />
+        <Route path="/" component={App} />
       </Switch>
     </Router>
   </Provider>,

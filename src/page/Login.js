@@ -6,7 +6,7 @@ const Login = (props) => {
     console.log("Failed:", errorInfo);
   };
   const onFinish = (values) => {
-    props.history.push("/index");
+    props.history.push("/");
     window.localStorage.setItem("login", values.username);
     // console.log(props.history);
   };
