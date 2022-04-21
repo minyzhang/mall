@@ -1,5 +1,5 @@
 import Home from './Home/Home'
-import GoodsList from './Goods/Goods'
+import Detail from './Detail/Detail'
 import Login from './Login'
-export {Home,GoodsList,Login}
+export {Home,Detail,Login}
  

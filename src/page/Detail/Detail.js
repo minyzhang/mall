@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { getInfo } from "../../service/request";
 
-const GoodsList = (props) => {
+const Detail = (props) => {
   const [fileName, setFileName] = useState([]);
 
   useEffect(() => {
@@ -29,4 +29,4 @@ const GoodsList = (props) => {
   );
 };
 
-export default GoodsList;
+export default Detail;

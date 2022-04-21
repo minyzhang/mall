@@ -22,7 +22,7 @@ const Tables = (props) => {
       <Table
         onRow={(pro, column, index) => {
           return {
-            onClick: (e)=>{ props.history.push({pathname:'/goods',state:{info:pro.full_name}})},
+            onClick: (e)=>{ props.history.push({pathname:'/detail',state:{info:pro.full_name}})},
           };
         }}
         columns={columns}

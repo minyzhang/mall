@@ -1,4 +1,4 @@
-import { Home, GoodsList } from "./page/index";
+import { Home, Detail } from "./page/index";
 import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 
 const routes = [
@@ -10,9 +10,9 @@ const routes = [
     icon: <UserOutlined />,
   },
   {
-    path: "/goods",
-    component: GoodsList,
-    title: "goods",
+    path: "/detail",
+    component: Detail,
+    title: "detail",
     isShow: true,
     icon: <VideoCameraOutlined />,
   },

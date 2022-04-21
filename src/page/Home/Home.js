@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { Button, Modal } from "antd";
-import {Table}  from "../../component/index";
+import { Table } from "../../component/index";
 import { getList } from "../../service/request";
+import { connect } from "react-redux";
+import { depot } from "../../action/index";
+// import store from "../../store";
 
 const App = (props) => {
   const [username, setUsername] = useState("");
@@ -12,16 +15,19 @@ const App = (props) => {
   };
   const handleOk = (event) => {
     getList(username).then((resp) => {
-      console.log(resp);
+      // console.log(typeof resp.data);
+      // store.dispatch(TypeData())
       setUseSource([...resp.data]);
       setUsername("");
       setIsModalVisible(false);
+    props.depot(resp.data);
     });
   };
+
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const data = useSource.map((item) => {
+  const data = props.arr.map((item) => {
     return {
       key: item.id,
       name: item.name,
@@ -29,6 +35,8 @@ const App = (props) => {
       address: item.html_url,
     };
   });
+  
+
   return (
     <Fragment>
       <Button type="primary" style={{ margin: "10px" }} onClick={addName}>
@@ -55,4 +63,9 @@ const App = (props) => {
   );
 };
 
-export default App;
+export default connect(
+  (res) => {
+    return { ...res.depotData };
+  },
+  { depot }
+)(App);
