@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/detail",
     component: Detail,
-    title: "home/detail",
+    title: "Home/detail",
     isShow: true,
   },
 ];

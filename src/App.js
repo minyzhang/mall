@@ -1,5 +1,5 @@
 import { Layout, Breadcrumb, Button } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
@@ -13,6 +13,11 @@ const App = (props) => {
     localStorage.removeItem("login");
     return props.history.push("/login");
   };
+  useEffect(() => {
+    if (!localStorage.getItem("login")) {
+      props.history.push("/login");
+    }
+  }, []);
   return (
     <Layout className="site-layout">
       <Header
@@ -45,16 +50,13 @@ const App = (props) => {
         }}
       >
         <Switch>
-          {route.map((item) => {
-            const ComPo = item.component;
-            return (
-              <Route
-                key={item.path}
-                path={item.path}
-                render={(prop) => <ComPo {...prop} />}
-              />
-            );
-          })}
+          {route.map((item) => (
+            <Route
+              key={item.path}
+              path={item.path}
+              render={(prop) => <item.component {...prop} />}
+            />
+          ))}
           <Redirect from="/" to="/home" exact />
         </Switch>
       </Content>
