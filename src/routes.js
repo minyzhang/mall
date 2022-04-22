@@ -1,12 +1,6 @@
-import { Home, Detail, Login } from "./page/index";
+import { Home, Detail } from "./page/index";
 
 const routes = [
-  {
-    path: "/login",
-    component: Login,
-    title: "login",
-    isShow: true,
-  },
   {
     path: "/home",
     component: Home,

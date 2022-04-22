@@ -1,25 +1,21 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
+import { connect } from "react-redux";
 import { getInfo } from "../../service/request";
+import { DetailUl, DetailBtn } from "../../component/index";
+import { detail } from "../../action/index";
 
 const Detail = (props) => {
-  const [fileName, setFileName] = useState([]);
-
   useEffect(() => {
     getInfo(props.location.state.info).then((res) => {
-      // console.log(res);
-      setFileName(res.data);
+      props.detail(res.data);
     });
   }, []);
   return (
     <Fragment>
-      <button type="button" style={{ margin: "10px 0" }} onClick={() => { props.history.goBack(); }}>
-        返回
-      </button>
-      <ul>
-        {fileName.map((item) => <li key={item.name}>{item.name}</li>)}
-      </ul>
+      <DetailBtn {...props} />
+      <DetailUl data={props.arr} />
     </Fragment>
   );
 };
 
-export default Detail;
+export default connect((res) => ({ ...res.detailList }), { detail })(Detail);

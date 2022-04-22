@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from "react";
 import { Button, Modal } from "antd";
 import { connect } from "react-redux";
-import Table from "../../component/index";
+import { Table, Form } from "../../component/index";
 import { getList } from "../../service/request";
-import depot from "../../action/index";
-// import store from "../../store";
+import { depot } from "../../action/index";
 
 function App(props) {
   const [username, setUsername] = useState("");
@@ -23,6 +22,7 @@ function App(props) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const onChange = (event) => setUsername(event.target.value);
   const data = props.arr.map((item) => ({
     key: item.id,
     name: item.name,
@@ -41,15 +41,7 @@ function App(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <form>
-          <input
-            type="text"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            placeholder="GitHub username"
-            required
-          />
-        </form>
+        <Form value={username} onChange={onChange} />
       </Modal>
       <Table data={data} {...props} />
     </Fragment>
