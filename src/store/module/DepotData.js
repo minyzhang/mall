@@ -8,6 +8,11 @@ const depotData = (state = data, actions) => {
         ...state,
         arr: [...actions.arr],
       };
+    case "loginOut":
+      return {
+        ...state,
+        arr: [...actions.arr],
+      };
     default:
       return state;
   }

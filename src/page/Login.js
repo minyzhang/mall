@@ -1,13 +1,15 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
+import { withRouter } from "react-router-dom";
 
 const Login = (props) => {
+  console.log(props);
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
   const onFinish = (values) => {
-    props.history.push("/");
-    window.localStorage.setItem("login", values.username);
+    localStorage.setItem("login", values.username);
+    props.history.push("/index/home");
     // console.log(props.history);
   };
   return (
@@ -45,4 +47,4 @@ const Login = (props) => {
     </Form>
   );
 };
-export default Login;
+export default withRouter(Login);

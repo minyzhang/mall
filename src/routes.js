@@ -1,17 +1,30 @@
-import { Home, Detail } from "./page/index";
+import { Home, Detail, Login } from "./page/index";
+import App from './App';
 
 const routes = [
   {
-    path: "/home",
-    component: Home,
-    title: "Home",
+    path: "/login",
+    component: Login,
+    title: "login",
     isShow: true,
   },
   {
-    path: "/detail",
-    component: Detail,
-    title: "Home/detail",
-    isShow: true,
+    path: "/index",
+    component: App,
+    children: [
+      {
+        path: "/index/home",
+        component: Home,
+        title: "Home",
+        isShow: true,
+      },
+      {
+        path: "/index/detail",
+        component: Detail,
+        title: "Detail",
+        isShow: true,
+      },
+    ],
   },
 ];
 export default routes;

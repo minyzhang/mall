@@ -21,7 +21,7 @@ export default withRouter((props) => (
   <Table
     onRow={(pro) => ({
       onClick: () => (props.history.push({
-        pathname: `/detail`,
+        pathname: `/index/detail`,
         state: { info: pro.full_name },
       })),
     })}
